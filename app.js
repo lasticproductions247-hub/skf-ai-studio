@@ -124,9 +124,10 @@ async function send(){
       signal: ctrl.signal,
       body: JSON.stringify({
         model: CFG.model,
+        think: false,
         messages: [{ role: "system", content: sys }, { role: "user", content: text }],
         stream: true,
-        options: { temperature: CFG.temp, num_ctx: 2048 },
+        options: { temperature: CFG.temp, num_ctx: 2048, num_predict: 512 },
       }),
     });
     if (!r.ok) throw new Error("ollama said " + r.status);
