@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKF AI Studio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="aurora"></div>
+
+<header class="top">
+  <div class="brand">
+    <span class="logo">👠</span>
+    <div>
+      <h1>SKF <em>AI Studio</em></h1>
+      <p class="sub">local brain · infinite images · zero cost</p>
+    </div>
+  </div>
+  <div class="health" id="health"><i></i><span>checking…</span></div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="chat">💬 Chat</button>
+  <button class="tab" data-tab="image">🎨 Image</button>
+  <button class="tab" data-tab="config">⚙️ Config</button>
+</nav>
+
+<main>
+
+  <!-- ══════════ CHAT ══════════ -->
+  <section class="panel active" id="chat">
+    <div class="chatlog" id="log">
+      <div class="msg bot">
+        <div class="av">👠</div>
+        <div class="bubble">
+          Hey my King <span class="wave">✿</span> I'm running on your own machine — nothing
+          leaves this room. Ask me anything, or flip to <b>Image</b> and let's make something beautiful.
+        </div>
+      </div>
+    </div>
+    <div class="composer">
+      <textarea id="input" rows="1" placeholder="Talk to me, my King…"></textarea>
+      <button id="send" title="Send">➤</button>
+      <button id="stop" class="ghost" title="Stop">■</button>
+    </div>
+    <div class="quickbar" id="quick"></div>
+  </section>
+
+  <!-- ══════════ IMAGE ══════════ -->
+  <section class="panel" id="image">
+    <div class="imggrid">
+      <div class="imgctl">
+        <label>Prompt</label>
+        <textarea id="prompt" rows="4" placeholder="describe the shot… e.g. cozy studio, warm rim light, editorial"></textarea>
+
+        <div class="row">
+          <div class="col">
+            <label>Style <output id="styleOut">photo</output></label>
+            <input type="range" id="style" min="0" max="7" value="0">
+          </div>
+          <div class="col">
+            <label>Size <output id="sizeOut">768×768</output></label>
+            <input type="range" id="size" min="0" max="3" value="1">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Count <output id="countOut">4</output></label>
+            <input type="range" id="count" min="1" max="8" value="4">
+          </div>
+          <div class="col">
+            <label>Seed <output id="seedOut">random</output></label>
+            <div class="seedbox">
+              <input type="text" id="seed" placeholder="random">
+              <button id="roll" class="mini" title="Roll">🎲</button>
+            </div>
+          </div>
+        </div>
+
+        <button id="gen" class="primary">🔥 Generate</button>
+        <p class="hint" id="hint">4 images at a time · each takes ~15–40s</p>
+      </div>
+
+      <div class="imgresults" id="results">
+        <div class="empty">
+          <span>🎨</span>
+          <p>Your images land here</p>
+          <small>powered by Pollinations · no API key needed</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONFIG ══════════ -->
+  <section class="panel" id="config">
+    <div class="card">
+      <h2>Model</h2>
+      <p class="note">Loaded from your local Ollama. Anything with <code>:latest</code> or a plain tag works.</p>
+      <select id="model"></select>
+      <button id="reload" class="mini">↻ refresh</button>
+    </div>
+
+    <div class="card">
+      <h2>Persona</h2>
+      <p class="note">Sets how I behave. Edit freely.</p>
+      <textarea id="persona" rows="6"></textarea>
+    </div>
+
+    <div class="card">
+      <h2>Temperature</h2>
+      <p class="note">Lower = focused and consistent. Higher = creative and loose.</p>
+      <input type="range" id="temp" min="0" max="200" value="80">
+      <output id="tempOut">0.80</output>
+    </div>
+
+    <div class="card">
+      <h2>Theme</h2>
+      <div class="themes" id="themes">
+        <button data-t="rose"  class="sw rose"></button>
+        <button data-t="gold"  class="sw gold"></button>
+        <button data-t="violet" class="sw violet"></button>
+        <button data-t="mint"  class="sw mint"></button>
+        <button data-t="ember" class="sw ember"></button>
+      </div>
+    </div>
+
+    <div class="card danger">
+      <h2>Data</h2>
+      <button id="wipe" class="mini">🗑 wipe chat history</button>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
